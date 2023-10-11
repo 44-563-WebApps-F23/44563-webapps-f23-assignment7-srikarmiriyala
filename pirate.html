@@ -74,42 +74,113 @@
         <p id="penalty">Penalty is zero.</p>
     </div>
     <div>
-        <p>Click for help.</p>
+        <p id="help">Click for help.</p>
     </div>
     <div>
-        <p id="help">Help report</p>
+        <p id="helpRep">Help report</p>
     </div>
     <div id="game-field">
         
-        <div class="location"><img src="start_image.jpg" alt="Starting Location"></div>
-        <div class="location"><img src="treasure_image.jpg" alt="Treasure"></div>
-        <div class="location"><img src="trap_image.jpg" alt="Trap"></div>
-        <div class="location"><img src="pirate_image.jpg" alt="Pirate"></div>
-        <div class="location"><img src="start_image.jpg" alt="Starting Location"></div>
+        <div class="location"><img id="img0" src="start_image.jpg" alt="Starting Location" onclick="check(0)"></div>
+        <div class="location"><img id="img1" src="start_image.jpg" alt="Treasure" onclick="check(1)"></div>
+        <div class="location"><img id="img2" src="start_image.jpg" alt="Trap" onclick="check(2)"></div>
+        <div class="location"><img id="img3" src="start_image.jpg" alt="Pirate" onclick="check(3)"></div>
+        <div class="location"><img id="img4" src="start_image.jpg" alt="Starting Location" onclick="check(4)"></div>
 
-        <div class="location"><img src="start_image.jpg" alt="Starting Location"></div>
-        <div class="location"><img src="treasure_image.jpg" alt="Treasure"></div>
-        <div class="location"><img src="trap_image.jpg" alt="Trap"></div>
-        <div class="location"><img src="pirate_image.jpg" alt="Pirate"></div>
-        <div class="location"><img src="start_image.jpg" alt="Starting Location"></div>
+        <div class="location"><img id="img5" src="start_image.jpg" alt="Starting Location" onclick="check(5)"></div>
+        <div class="location"><img id="img6" src="start_image.jpg" alt="Treasure" onclick="check(6)"></div>
+        <div class="location"><img id="img7" src="start_image.jpg" alt="Trap" onclick="check(7)"></div>
+        <div class="location"><img id="img8" src="start_image.jpg" alt="Pirate" onclick="check(8)"></div>
+        <div class="location"><img id="img9" src="start_image.jpg" alt="Starting Location" onclick="check(9)"></div>
 
-        <div class="location"><img src="start_image.jpg" alt="Starting Location"></div>
-        <div class="location"><img src="treasure_image.jpg" alt="Treasure"></div>
-        <div class="location"><img src="trap_image.jpg" alt="Trap"></div>
-        <div class="location"><img src="pirate_image.jpg" alt="Pirate"></div>
-        <div class="location"><img src="start_image.jpg" alt="Starting Location"></div>
+        <div class="location"><img id="img10" src="start_image.jpg" alt="Starting Location" onclick="check(10)"></div>
+        <div class="location"><img id="img11" src="start_image.jpg" alt="Treasure" onclick="check(11)"></div>
+        <div class="location"><img id="img12" src="start_image.jpg" alt="Trap" onclick="check(12)"></div>
+        <div class="location"><img id="img13" src="start_image.jpg" alt="Pirate" onclick="check(13)"></div>
+        <div class="location"><img id="img14" src="start_image.jpg" alt="Starting Location" onclick="check(14)"></div>
 
-        <div class="location"><img src="start_image.jpg" alt="Starting Location"></div>
-        <div class="location"><img src="treasure_image.jpg" alt="Treasure"></div>
-        <div class="location"><img src="trap_image.jpg" alt="Trap"></div>
-        <div class="location"><img src="pirate_image.jpg" alt="Pirate"></div>
-        <div class="location"><img src="start_image.jpg" alt="Starting Location"></div>
+        <div class="location"><img id="img15" src="start_image.jpg" alt="Starting Location" onclick="check(15)"></div>
+        <div class="location"><img id="img16" src="start_image.jpg" alt="Treasure" onclick="check(16)"></div>
+        <div class="location"><img id="img17" src="start_image.jpg" alt="Trap" onclick="check(17)"></div>
+        <div class="location"><img id="img18" src="start_image.jpg" alt="Pirate" onclick="check(18)"></div>
+        <div class="location"><img id="img19" src="start_image.jpg" alt="Starting Location" onclick="check(19)"></div>
 
-        <div class="location"><img src="start_image.jpg" alt="Starting Location"></div>
-        <div class="location"><img src="treasure_image.jpg" alt="Treasure"></div>
-        <div class="location"><img src="trap_image.jpg" alt="Trap"></div>
-        <div class="location"><img src="pirate_image.jpg" alt="Pirate"></div>
-        <div class="location"><img src="start_image.jpg" alt="Starting Location"></div>
+        <div class="location"><img id="img20" src="start_image.jpg" alt="Starting Location" onclick="check(20)"></div>
+        <div class="location"><img id="img21" src="start_image.jpg" alt="Treasure" onclick="check(21)"></div>
+        <div class="location"><img id="img22" src="start_image.jpg" alt="Trap" onclick="check(22)"></div>
+        <div class="location"><img id="img23" src="start_image.jpg" alt="Pirate" onclick="check(23)"></div>
+        <div class="location"><img id="img24" src="start_image.jpg" alt="Starting Location" onclick="check(24)"></div>
     </div>
+    <script>
+        // Declare variables
+        var ids = []; // Array of unique IDs
+        var checkCount = 0;
+        var penalty = 0;
+        var lastCheck = 0;
+        var treasureLocation = 5;
+        var trapLocation = 18;
+        var gameOver = false;
+      
+        // Populate the ids array with the unique IDs for each image
+        for (var i = 0; i < 25; i++) {
+          ids.push("img" + i);
+        }
+      
+        // Function to handle image clicks
+        function check(position) {
+          if (gameOver) return;
+      
+          var id = ids[position];
+          var img = document.getElementById(id);
+      
+          if (position === treasureLocation) {
+            img.src = "treasure_image.jpg";
+            gameOver = true;
+            penalty -= 3;
+          } else if (position === trapLocation) {
+            img.src = "trap_image.jpg";
+            gameOver = true;
+            penalty += 4;
+          } else {
+            img.src = "pirate_image.jpg";
+            checkCount++;
+            penalty++;
+          }
+      
+          document.getElementById("locations").textContent = "Number of locations checked is " + checkCount;
+          document.getElementById("penalty").textContent = "Penalty is " + penalty;
+      
+          lastCheck = position;
+        }
+      
+        // Function to provide help
+        function help() {
+          if (gameOver) return;
+      
+          // Compute row and col for treasure and lastCheck
+          var treasureRow = Math.floor(treasureLocation / 5);
+          var treasureCol = treasureLocation % 5;
+          var lastRow = Math.floor(lastCheck / 5);
+          var lastCol = lastCheck % 5;
+      
+          var rowDiff = Math.abs(treasureRow - lastRow);
+          var colDiff = Math.abs(treasureCol - lastCol);
+      
+          if ((rowDiff === 1 && colDiff === 0) || (rowDiff === 0 && colDiff === 1)) {
+            document.getElementById("helpRep").textContent = "Can smell it";
+          } else if ((rowDiff === 2 && colDiff === 0) || (rowDiff === 0 && colDiff === 2)) {
+            document.getElementById("helpRep").textContent = "Close Matie";
+            penalty += 2;
+          } else {
+            document.getElementById("helpRep").textContent = "Step faster";
+            penalty += 2;
+          }
+      
+          document.getElementById("penalty").textContent = "Penalty is " + penalty;
+        }
+      
+        // Set the onClick property of the "Click for help" element to invoke the help function
+        document.getElementById("help").onclick = help;
+      </script>      
 </body>
 </html>
