@@ -4,5 +4,7 @@ An assignment on java script modifying the DOM and using anonymous callback func
 --------
 # Hosted at
 [--Pirate webpage](https://44-563-webapps-f23.github.io/44563-webapps-f23-assignment7-srikarmiriyala/pirate.html)
+
 [--React webpage](https://44-563-webapps-f23.github.io/44563-webapps-f23-assignment7-srikarmiriyala/react.html)
+
 [--Merger webpage](https://44-563-webapps-f23.github.io/44563-webapps-f23-assignment7-srikarmiriyala/merger.html)
