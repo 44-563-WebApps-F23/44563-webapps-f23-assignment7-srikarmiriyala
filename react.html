@@ -27,7 +27,7 @@
             font-weight: bold;
         }
 
-        .btn-start-timer, .btn-react {
+        .btn-start-timer, .btn-react, .btn-new-game {
             font-size: 24px;
             margin-top: 20px;
             margin-right: 10px;
@@ -45,14 +45,15 @@
 
         function startTimer() {
             
+            let countdownTime = Math.floor(Math.random() * (10 - 2 + 1)) + 2;
             let tooSlowTimeout = setTimeout(() => {
                 document.getElementById('target').innerText = 'Too Slow';
-            }, 8000);
+            },  countdownTime * 1000);
 
             for (let i = 0; i < 9; i++) {
                 setTimeout(() => {
                     document.getElementById('counter').innerText = `Count: ${i}`;
-                }, (8 - i) * 1000);
+                }, (countdownTime - i) * 1000);
             }
 
             setTimeout(() => {
@@ -64,7 +65,36 @@
                     let elapsedTime = endTime - reactTime;
                     document.getElementById('target').innerText = `Your time: ${elapsedTime} ms`;
                 }
-            }, 8000);
+            }, countdownTime * 1000);
+        }
+
+        function startNewGame() {
+            reactTime = undefined;
+            document.getElementById('target').innerText = 'Your time: ';
+            document.getElementById('counter').innerText = 'Count: ';
+
+            let countdownTime = Math.floor(Math.random() * (10 - 2 + 1)) + 2;
+
+            let tooSlowTimeout = setTimeout(() => {
+                document.getElementById('target').innerText = 'Too Slow';
+            }, countdownTime * 1000);
+
+            for (let i = 0; i < 9; i++) {
+                setTimeout(() => {
+                    document.getElementById('counter').innerText = `Count: ${i}`;
+                }, (countdownTime - i) * 1000);
+            }
+
+            setTimeout(() => {
+                clearTimeout(tooSlowTimeout);
+                if (reactTime === undefined) {
+                    document.getElementById('target').innerText = 'Too Slow';
+                } else {
+                    let endTime = Date.now();
+                    let elapsedTime = endTime - reactTime;
+                    document.getElementById('target').innerText = `Your time: ${elapsedTime} ms`;
+                }
+            }, countdownTime * 1000);
         }
     </script>
 </head>
@@ -80,6 +110,7 @@
 
         <button class="btn btn-success btn-start-timer" onclick="startTimer()">Start Timer</button>
         <button class="btn btn-danger btn-react" onclick="recordTime()">React</button>
+        <button class="btn btn-secondary btn-new-game" onclick="startNewGame()">New Game</button>
     </main>
 </body>
 </html>

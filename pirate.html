@@ -111,6 +111,7 @@
         <div class="location"><img id="img23" src="start_image.jpg" alt="Pirate" onclick="check(23)"></div>
         <div class="location"><img id="img24" src="start_image.jpg" alt="Starting Location" onclick="check(24)"></div>
     </div>
+    <button class="btn btn-warning btn-start-timer" onclick="newGame()">New Game</button>
     <script>
         // Declare variables
         var ids = []; // Array of unique IDs
@@ -181,6 +182,37 @@
       
         // Set the onClick property of the "Click for help" element to invoke the help function
         document.getElementById("help").onclick = help;
-      </script>      
+
+        //Bonus
+        function newGame() {
+        
+        checkCount = 0;
+        penalty = 0;
+        lastCheck = 0;
+        gameOver = false;
+
+        
+        treasureLocation = Math.floor(Math.random() * 25);
+        trapLocation = Math.floor(Math.random() * 25);
+
+        
+        while (trapLocation === treasureLocation) {
+        trapLocation = Math.floor(Math.random() * 25);
+        }
+
+
+        for (let i = 0; i < 25; i++) {
+            const id = `img${i}`;
+            const imageElement = document.getElementById(id);
+            imageElement.src = "start_image.jpg";
+            imageElement.style.borderColor = "#ccc";
+        }
+
+
+        document.getElementById("locations").innerText = `Number of locations checked is ${checkCount}.`;
+        document.getElementById("penalty").innerText = `Penalty is ${penalty}.`;
+        document.getElementById("helpRep").innerText = "Help report";
+    }
+    </script>      
 </body>
 </html>
